@@ -14,35 +14,27 @@
 
 
 function duplicateCount(text){
-    let textToLowerCase = text.toLowerCase();
-    let textLength = text.length;
-    
-    let map = createSymbolWithDuplicatinCountMap(textToLowerCase, textLength)
-
+    const textToLowerCase = text.toLowerCase();
+    const map = createSymbolWithDuplicatinCountMap(textToLowerCase);
     return countDuplicationSymbolFromMap(map);
 }
 
-function createSymbolWithDuplicatinCountMap(text, length){
-    let map = new Map();
-
-    for(i = 0; i < length; i++){
-        let symbol = text[i];
-        if(map.has(symbol)){
-            let count = map.get(symbol) + 1;
-            map.set(symbol, count);
-        }
-        else{
-            map.set(symbol, 1);
-        }
+function createSymbolWithDuplicatinCountMap(text)
+{
+    const map = new Map();
+    for (i = 0; i < text.length; i++)
+    {
+        const symbol = text[i];
+        map.set(symbol, map.has(symbol) ? map.get(symbol) + 1 : 1);
     }
-
     return map;
 }
 
 function countDuplicationSymbolFromMap(map){
     let count = 0;
 
-    for(let [key, value] of map){
+    for (const [key, value] of map)
+    {
         if(value > 1){
             count++;
         }
